@@ -9,6 +9,21 @@
   </head>
   <body>
     <script src="app.js"></script>
-    <h1>HELLO!</h1>
+    <h1 id="name">HELLO!</h1>
+
+    <input id="id" type="text" />
+    <button onclick="getID()">id전송</button>
+    <script>
+      function getID() {
+        const id = document.getElementById("id").value;
+        console.log(id);
+        fetch(`http://localhost:3000/role/${id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.role);
+            document.getElementById("name").innerHTML = data.role;
+          });
+      }
+    </script>
   </body>
 </html>
