@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function getMemo() {
+        const memo = document.getElementById("memo").value;
+        console.log(memo);
+        fetch(`http://localhost:3000/${memo}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.m_content);
+            document.getElementById("m_content").innerHTML = data.m_content;
+            let tagArea = document.getElementById("m_con");
+            let new_pTag = document.createElement("p");
+            new_pTag.setAttribute("class", "pTag");
+            new_pTag.innerHTML = data.m_content;
+            tagArea.appendChild(new_pTag);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <h2>HOME</h2>
+    <input id="memo" type="text" />
+    <input type="button" onclick="getMemo()" value="전송" />
+    <div id="m_con">
+      <p id="m_content">내용이 없습니다</p>
+    </div>
+  </body>
+</html>
